@@ -269,7 +269,7 @@ export class SuperpaveReportComponent implements OnInit {
       const boxLeft = 11;
       const boxTop = 40.5;
       const boxWidth = 190;
-      const innerMargin = {left: 11, right: 9};
+      const innerMargin = {left: 11, right: 9, bottom: 32};
 
       doc.setFontSize(10);
       doc.setFont('Amiri', 'bold');
@@ -287,7 +287,7 @@ export class SuperpaveReportComponent implements OnInit {
         margin: innerMargin,
         styles: {
           fontSize: 6.5,
-          cellPadding: 0.5,
+          cellPadding: 0.65,
           font: 'Amiri',
           textColor: [0, 0, 0] as [number, number, number],
           lineColor: [0, 0, 0] as [number, number, number],
@@ -418,7 +418,7 @@ export class SuperpaveReportComponent implements OnInit {
         ],
         ...grid,
         tableWidth: 78,
-        margin: {left: 11},
+        margin: {left: 11, bottom: 32},
         columnStyles: {
           0: {cellWidth: 52},
           1: {...center, cellWidth: 26}
@@ -452,30 +452,43 @@ export class SuperpaveReportComponent implements OnInit {
         body: sieveRows,
         ...grid,
         tableWidth: 111,
-        margin: {left: 90}
+        margin: {left: 90, bottom: 32}
       });
       const gradY = (doc as any).lastAutoTable.finalY;
 
+      const tailY = 265;
+      const footerStart = Math.max(acY, gradY) + 1;
+      const maxEnd = tailY - 1;
+      const fill = maxEnd - footerStart - 4;
+      let remarksH = 10;
+      let signH = 14;
+      if (fill > remarksH + signH) {
+        remarksH = fill * 0.4;
+        signH = fill * 0.6;
+      }
+
       autoTable(doc, {
-        startY: Math.max(acY, gradY) + 2,
+        startY: footerStart,
+        pageBreak: 'avoid',
         body: [
-          [{content: `Remarks : ${s.notes || ''}`, colSpan: 3, styles: {halign: 'left', minCellHeight: 10}}],
+          [{content: `Remarks : ${s.notes || ''}`, colSpan: 3, styles: {halign: 'left', valign: 'top', minCellHeight: remarksH}}],
           [
-            {content: `Tested By\n${s.testBy || ''}`, styles: center},
-            {content: `Checked By\n${s.adopter || ''}`, styles: center},
-            {content: `Approved By\n${s.lastApproveBy || ''}`, styles: center}
+            {content: `Tested By\n${s.testBy || ''}`, styles: {...center, minCellHeight: signH}},
+            {content: `Checked By\n${s.adopter || ''}`, styles: {...center, minCellHeight: signH}},
+            {content: `Approved By\n${s.lastApproveBy || ''}`, styles: {...center, minCellHeight: signH}}
           ]
         ],
         ...grid,
-        styles: {...grid.styles, fontSize: 7, minCellHeight: 8}
+        margin: {left: 11, right: 9, bottom: 32},
+        styles: {...grid.styles, fontSize: 7}
       });
 
-      const boxBottom = Math.min((doc as any).lastAutoTable.finalY, 263);
+      const boxBottom = Math.min((doc as any).lastAutoTable.finalY, tailY);
       doc.setDrawColor(0, 0, 0);
       doc.setLineWidth(0.5);
       doc.rect(boxLeft, boxTop, boxWidth, boxBottom - boxTop);
 
-      doc.addImage(tail, 'PNG', 0, 265, 210, 33);
+      doc.addImage(tail, 'PNG', 0, tailY, 210, 33);
       doc.save(`SuperpaveReport_${s.reportNo || s.id}.pdf`);
     };
   }
