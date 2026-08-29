@@ -1,0 +1,149 @@
+.invoice-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 70px 12px 40px 12px;
+}
+
+.report-frame {
+  width: 100%;
+  border: 2px solid #000;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.report-frame > tr > .main-title,
+.report-frame > tbody > tr > .main-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px 6px;
+  border: none;
+  border-bottom: 1px solid #000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: #fff;
+}
+
+.report-frame > tbody > tr > td.nested {
+  border: none;
+  padding: 0;
+  vertical-align: top;
+}
+
+.report-frame .section-cell {
+  padding: 2px 0 0 0;
+}
+
+.section-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 4px 8px 2px 8px;
+}
+
+.section-title .std {
+  float: right;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.inner {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.inner td,
+.inner th {
+  border: 1px solid #000;
+  padding: 3px 5px;
+  font-size: 12px;
+}
+
+.inner th {
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+td.lbl {
+  text-align: left;
+  white-space: nowrap;
+}
+
+td.num {
+  text-align: center;
+}
+
+.head-table td:nth-child(even) {
+  text-align: center;
+}
+
+.head-table .lbl {
+  width: 18%;
+  font-weight: 600;
+}
+
+.avg-ac {
+  text-align: center;
+  font-weight: bold;
+}
+
+.extract-wrap.inner > tbody > tr > td.nested-split {
+  border: none;
+  padding: 0;
+  vertical-align: top;
+  width: 50%;
+}
+
+.nested-split {
+  width: 50%;
+  vertical-align: top;
+  padding: 0;
+}
+
+.asphalt-content {
+  width: 100%;
+}
+
+.gradation-table th {
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.footer-table .remarks {
+  height: 48px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.sign-row td {
+  text-align: center;
+  height: 52px;
+  vertical-align: top;
+  width: 33%;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #218838;
+}
+
+@media print {
+  .invoice-container {
+    padding-top: 20px;
+  }
+
+  button {
+    display: none;
+  }
+}

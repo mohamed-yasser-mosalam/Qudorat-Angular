@@ -1,0 +1,110 @@
+.form-container {
+  margin-left: 260px;
+  padding: 70px 20px 20px 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
+.step-indicator span {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  color: #666;
+}
+
+.step-indicator span.active {
+  background: #007bff;
+  color: white;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.bitumen-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label,
+h4 {
+  margin-bottom: 6px;
+  margin-top: 16px;
+}
+
+.form-control {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.custom-inline-group {
+  display: flex;
+  gap: 20px;
+}
+
+.sieve-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.specimen-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.constants-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.hint {
+  color: #666;
+  font-size: 13px;
+}
+
+@media (max-width: 1200px) {
+  .form-container {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .sieve-grid,
+  .specimen-grid,
+  .constants-row {
+    grid-template-columns: 1fr;
+  }
+}

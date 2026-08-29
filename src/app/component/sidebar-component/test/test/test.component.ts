@@ -68,12 +68,33 @@ export class TestComponent implements OnInit {
     window.location.reload();
   }
 
-  goToTrail(testId: number, id: number) {
-    if (id == 1) this.router.navigate([`/sands/${testId}`]);
-    if (id == 2) this.router.navigate([`/asphalt/${testId}`]);
-    if (id == 3) this.router.navigate([`/compressive-strength/${testId}`]);
-    if (id == 4) this.router.navigate([`/atterberg/${testId}`]);
-    if (id == 5) this.router.navigate([`/moisture-density-relationship/${testId}`]);
+  goToTrail(testId: string | number, managerId: number, managerName: string = '') {
+    const name = (managerName || '').toLowerCase();
+    const id = String(testId || '');
+
+    if (name.replace(/\s+/g, '').includes('superpave') || id.startsWith('SP-')) {
+      this.router.navigate([`/superpave/${testId}`]);
+      return;
+    }
+    if (managerId == 1 || id.startsWith('SO-')) {
+      this.router.navigate([`/sands/${testId}`]);
+      return;
+    }
+    if (managerId == 2 || id.startsWith('AM-')) {
+      this.router.navigate([`/asphalt/${testId}`]);
+      return;
+    }
+    if (managerId == 3 || id.startsWith('CS-')) {
+      this.router.navigate([`/compressive-strength/${testId}`]);
+      return;
+    }
+    if (managerId == 4 || id.startsWith('AL-')) {
+      this.router.navigate([`/atterberg/${testId}`]);
+      return;
+    }
+    if (managerId == 5 || id.startsWith('MD-')) {
+      this.router.navigate([`/moisture-density-relationship/${testId}`]);
+    }
   }
 
   changeActive(id: number) {

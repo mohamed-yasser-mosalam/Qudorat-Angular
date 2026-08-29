@@ -1,0 +1,24 @@
+<div class="trial-container">
+  <div class="header-container">
+    <h1 class="header">Trial List <span> ({{ id }})</span></h1>
+    <div class="button-container">
+      <button class="btn-add btn btn-primary" routerLink="/superpave/insert/{{id}}" *ngIf="role =='ROLE_TECH' || role == 'ROLE_ADMIN'">New Trial</button>
+      <button class="btn-add btn btn-success" (click)="adopt(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Adopt</button>
+      <button class="btn-add btn btn-danger" (click)="reject(id)" *ngIf="(role =='ROLE_SUPERVISOR') && !test.adopt">Reject</button>
+      <button class="btn-add btn btn-success" (click)="approve(id)" *ngIf="(role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN') && test.adopt && !test.approved">Approve</button>
+    </div>
+  </div>
+
+  <div class="card-container">
+    <div class="trial-card" *ngFor="let temp of test.superpaves; index as i">
+      <div class="trial-content">
+        <h3>Project ID: {{ test.project.id }}</h3>
+        <p><strong>Test ID:</strong> {{ test.id }}</p>
+        <p><strong>Trial No:</strong> {{ i + 1 }}</p>
+      </div>
+      <button class="btn btn-primary" routerLink="/superpave/update/{{temp.id}}" *ngIf="role=='ROLE_ADMIN' || role == 'ROLE_MANAGER'">Edit</button>
+      <button class="btn btn-success" routerLink="/superpave/report/{{temp.id}}">Report</button>
+      <button class="btn btn-danger" *ngIf="role=='ROLE_ADMIN'" (click)="delete(temp.id)">Delete</button>
+    </div>
+  </div>
+</div>

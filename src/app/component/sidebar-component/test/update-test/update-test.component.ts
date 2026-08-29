@@ -26,7 +26,6 @@ export class UpdateTestComponent implements OnInit {
   test: Test = {project: {} as Project, testManager: {} as TestManager} as Test;
   projects: Project[] = [];
   price: number = 0;
-  showExtraFields: boolean = false;
   id: number = 0;
   testManagers: TestManager[] = [];
 
@@ -48,17 +47,36 @@ export class UpdateTestComponent implements OnInit {
     this.testManagerService.findAll().subscribe(res => this.testManagers = res);
   }
 
-  onSideChange(id: number) {
-    this.testManagerService.findById(id).subscribe(res => {
-      this.price = res.price;
-      this.test.price = res.price;
-      this.showExtraFields = id == 2;
-      if (!this.showExtraFields) {
-        this.test.contractor = '';
-        this.test.jobOrder = '';
-        this.test.asphaltApplier = '';
-      }
-    });
+  get showExtraFields(): boolean {
+    return this.isAsphaltOrSuperpave(this.test?.testManager);
+  }
+
+  onSideChange(id: number | string) {
+    const tm = this.testManagers.find(t => t.id == id);
+    if (!tm) {
+      this.testManagerService.findById(Number(id)).subscribe(res => {
+        this.price = res.price;
+        this.test.price = res.price;
+      });
+      return;
+    }
+    this.test.testManager = { ...this.test.testManager, id: tm.id, name: tm.name, price: tm.price };
+    this.price = tm.price;
+    this.test.price = tm.price;
+    if (!this.isAsphaltOrSuperpave(tm)) {
+      this.test.contractor = '';
+      this.test.jobOrder = '';
+      this.test.asphaltApplier = '';
+    }
+  }
+
+  private isAsphaltOrSuperpave(tm?: TestManager | null): boolean {
+    if (!tm) {
+      return false;
+    }
+    const listed = this.testManagers.find(t => t.id == tm.id);
+    const name = (listed?.name || tm.name || '').toLowerCase().replace(/\s+/g, '');
+    return Number(tm.id) === 2 || name.includes('asphaltmarshall') || name.includes('superpave');
   }
 
   insert() {

@@ -16,13 +16,13 @@
         <div class="col-6">
           <label for="testManager" class="form-label">Test Name</label>
           <select class="form-select" aria-label="Default select example" type="text" id="testManager"
-                  name="testManager" [(ngModel)]="test.testManager.id" (change)="onSideChange(test.testManager.id)" required>
-            <option *ngFor="let test of testManagers" [value]="test.id">{{ test.name }}</option>
+                  name="testManager" [(ngModel)]="test.testManager.id" (ngModelChange)="onSideChange($event)" required>
+            <option *ngFor="let tm of testManagers" [ngValue]="tm.id">{{ tm.name }}</option>
           </select>
         </div>
       </div>
 
-      <!-- Conditional fields shown when Test Name (Test Manager) id is 2 -->
+      <!-- Contractor / Job Order / Asphalt Supplier: Asphalt Marshall and Superpave -->
       <div class="row mb-3" *ngIf="showExtraFields">
         <div class="col-4">
           <label for="contractor" class="form-label">Contractor</label>

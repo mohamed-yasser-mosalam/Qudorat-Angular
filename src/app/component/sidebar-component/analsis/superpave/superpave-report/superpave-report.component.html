@@ -1,0 +1,406 @@
+<div class="invoice-container" *ngIf="loaded">
+  <table class="report-frame">
+    <tr>
+      <th class="main-title">Bulk Specific Gravity of Compacted Specimen-AASHTO T166</th>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner head-table">
+          <tr>
+            <td class="lbl">PROJECT</td>
+            <td>{{ superpave.projectName }}</td>
+            <td class="lbl">DATE SAMPLED :</td>
+            <td>{{ formatDate(superpave.sampleDate) }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Contractor</td>
+            <td>{{ superpave.contractor }}</td>
+            <td class="lbl">DATE TESTED :</td>
+            <td>{{ formatDate(superpave.testingDate) }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Job Order</td>
+            <td>{{ superpave.jobOrder }}</td>
+            <td class="lbl">Sample Type</td>
+            <td>{{ superpave.sampleType }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Asphalt Supplier</td>
+            <td>{{ superpave.asphaltApplier }}</td>
+            <td class="lbl">Sample No</td>
+            <td>{{ superpave.sampleNo }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Request Description</td>
+            <td>{{ superpave.requestDescription }}</td>
+            <td class="lbl">Sampled By</td>
+            <td>{{ superpave.sampleBy }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Report No.</td>
+            <td>{{ superpave.reportNo }}</td>
+            <td class="lbl">Asphalt Layer</td>
+            <td>{{ superpave.asphaltLayer }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Location</td>
+            <td>{{ superpave.location }}</td>
+            <td class="lbl">Report Date</td>
+            <td>{{ formatDate(superpave.reportDate) }}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner data-table">
+          <tr>
+            <th></th>
+            <th colspan="4">Ndes</th>
+            <th colspan="4">Nmax</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>AVERAGE</th>
+            <th>SPEC'S</th>
+            <th>1</th>
+            <th>2</th>
+            <th>AVERAGE</th>
+            <th>SPEC'S</th>
+          </tr>
+          <tr>
+            <td class="lbl">A. Weight in Air, Dry (gms)</td>
+            <td class="num">{{ fmt(superpave.weightAirDryA, 0) }}</td>
+            <td class="num">{{ fmt(superpave.weightAirDryB, 0) }}</td>
+            <td></td>
+            <td></td>
+            <td class="num">{{ fmt(superpave.weightAirDryC, 0) }}</td>
+            <td class="num">{{ fmt(superpave.weightAirDryD, 0) }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">B. Weight in Air, SSD (gms)</td>
+            <td class="num">{{ fmt(superpave.weightAirSsdA, 0) }}</td>
+            <td class="num">{{ fmt(superpave.weightAirSsdB, 0) }}</td>
+            <td></td>
+            <td></td>
+            <td class="num">{{ fmt(superpave.weightAirSsdC, 0) }}</td>
+            <td class="num">{{ fmt(superpave.weightAirSsdD, 0) }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">C. Weight in Water, (gms)</td>
+            <td class="num">{{ fmt(superpave.weightWaterA, 0) }}</td>
+            <td class="num">{{ fmt(superpave.weightWaterB, 0) }}</td>
+            <td></td>
+            <td></td>
+            <td class="num">{{ fmt(superpave.weightWaterC, 0) }}</td>
+            <td class="num">{{ fmt(superpave.weightWaterD, 0) }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">D. Volume, (cc)</td>
+            <td class="num">{{ fmt(volNdesA, 0) }}</td>
+            <td class="num">{{ fmt(volNdesB, 0) }}</td>
+            <td></td>
+            <td></td>
+            <td class="num">{{ fmt(volNmaxA, 0) }}</td>
+            <td class="num">{{ fmt(volNmaxB, 0) }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">E. Specific Gravity (Gmb) (A/D)</td>
+            <td class="num">{{ fmt(gmbNdesA, 3) }}</td>
+            <td class="num">{{ fmt(gmbNdesB, 3) }}</td>
+            <td class="num">{{ fmt(gmbNdesAvg, 3) }}</td>
+            <td></td>
+            <td class="num">{{ fmt(gmbNmaxA, 3) }}</td>
+            <td class="num">{{ fmt(gmbNmaxB, 3) }}</td>
+            <td class="num">{{ fmt(gmbNmaxAvg, 3) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">Height &#64; Nini</td>
+            <td class="num">{{ fmt(superpave.heightNiniA, 1) }}</td>
+            <td class="num">{{ fmt(superpave.heightNiniB, 1) }}</td>
+            <td class="num">{{ fmt((superpave.heightNiniA + superpave.heightNiniB) / 2, 1) }}</td>
+            <td></td>
+            <td class="num">{{ fmt(superpave.heightNiniC, 1) }}</td>
+            <td class="num">{{ fmt(superpave.heightNiniD, 1) }}</td>
+            <td class="num">{{ fmt((superpave.heightNiniC + superpave.heightNiniD) / 2, 1) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">Height &#64; Ndes</td>
+            <td class="num">{{ fmt(superpave.heightNdesA, 1) }}</td>
+            <td class="num">{{ fmt(superpave.heightNdesB, 1) }}</td>
+            <td class="num">{{ fmt((superpave.heightNdesA + superpave.heightNdesB) / 2, 1) }}</td>
+            <td></td>
+            <td class="num">{{ fmt(superpave.heightNdesC, 1) }}</td>
+            <td class="num">{{ fmt(superpave.heightNdesD, 1) }}</td>
+            <td class="num">{{ fmt((superpave.heightNdesC + superpave.heightNdesD) / 2, 1) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">Height &#64; Nmax</td>
+            <td class="num">{{ zeroBlank(superpave.heightNmaxA, 1) }}</td>
+            <td class="num">{{ zeroBlank(superpave.heightNmaxB, 1) }}</td>
+            <td class="num">{{ zeroBlank((superpave.heightNmaxA + superpave.heightNmaxB) / 2, 1) }}</td>
+            <td></td>
+            <td class="num">{{ fmt(superpave.heightNmaxC, 1) }}</td>
+            <td class="num">{{ fmt(superpave.heightNmaxD, 1) }}</td>
+            <td class="num">{{ fmt((superpave.heightNmaxC + superpave.heightNmaxD) / 2, 1) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">% Gmm &#64; Nini</td>
+            <td class="num">{{ fmt(pctGmmNiniA, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNiniB, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNiniAvg, 1) }}</td>
+            <td class="num">{{ superpave.gmmNiniLimits }}</td>
+            <td class="num">{{ fmt(pctGmmNiniNmaxA, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNiniNmaxB, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNiniNmaxAvg, 1) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">% Gmm &#64; Ndes</td>
+            <td class="num">{{ fmt(pctGmmNdesA, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNdesB, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNdesAvg, 1) }}</td>
+            <td class="num">{{ superpave.gmmNdesLimits }}</td>
+            <td class="num">{{ fmt(pctGmmNmaxA, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNmaxB, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNmaxAvg, 1) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">% Gmm &#64; Nmax</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="num">{{ fmt(pctGmmNmaxA, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNmaxB, 1) }}</td>
+            <td class="num">{{ fmt(pctGmmNmaxAvg, 1) }}</td>
+            <td class="num">{{ superpave.gmmNmaxLimits }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Air Voids %</td>
+            <td class="num">{{ fmt(vaNdesA, 1) }}</td>
+            <td class="num">{{ fmt(vaNdesB, 1) }}</td>
+            <td class="num">{{ fmt(vaNdesAvg, 1) }}</td>
+            <td class="num">{{ superpave.airvoidsLimits }}</td>
+            <td class="num">{{ fmt(vaNmaxA, 1) }}</td>
+            <td class="num">{{ fmt(vaNmaxB, 1) }}</td>
+            <td class="num">{{ fmt(vaNmaxAvg, 1) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">Voids in Mineral Aggregate (VMA) %</td>
+            <td class="num">{{ fmt(vmaNdesA, 1) }}</td>
+            <td class="num">{{ fmt(vmaNdesB, 1) }}</td>
+            <td class="num">{{ fmt(vmaNdesAvg, 1) }}</td>
+            <td class="num">{{ superpave.vmaLimits }}</td>
+            <td class="num">{{ fmt(vmaNmaxA, 1) }}</td>
+            <td class="num">{{ fmt(vmaNmaxB, 1) }}</td>
+            <td class="num">{{ fmt(vmaNmaxAvg, 1) }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">Voids Filled (VF) %</td>
+            <td class="num">{{ fmt(vfNdesA, 1) }}</td>
+            <td class="num">{{ fmt(vfNdesB, 1) }}</td>
+            <td class="num">{{ fmt(vfNdesAvg, 1) }}</td>
+            <td class="num">{{ superpave.vfLimits }}</td>
+            <td class="num">{{ fmt(vfNmaxA, 1) }}</td>
+            <td class="num">{{ fmt(vfNmaxB, 1) }}</td>
+            <td class="num">{{ fmt(vfNmaxAvg, 1) }}</td>
+            <td></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested section-cell">
+        <div class="section-title">
+          MAXIMUM THEORETICAL SPECIFIC GRAVITY (Gmm)
+          <span class="std">ASTM D2041/D2041M-19</span>
+        </div>
+        <table class="inner data-table gmm-table">
+          <tr>
+            <th>SPECIMEN I.D.</th>
+            <th>1</th>
+            <th>2</th>
+            <th>AVERAGE</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <td class="lbl">A. Net Weight of Loose Mix (gms)</td>
+            <td class="num">{{ fmt(superpave.netWeightOfLooseMixA, 0) }}</td>
+            <td class="num">{{ fmt(superpave.netWeightOfLooseMixB, 0) }}</td>
+            <td></td>
+            <td class="lbl">Gb =</td>
+            <td class="num">{{ fmt(superpave.gb, 3) }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">B. Net Weight of Flask &amp; Water (gms)</td>
+            <td class="num">{{ fmt(superpave.netWeightOfFlaskWaterA, 0) }}</td>
+            <td class="num">{{ fmt(superpave.netWeightOfFlaskWaterB, 0) }}</td>
+            <td></td>
+            <td class="lbl">Gsb =</td>
+            <td class="num">{{ fmt(superpave.gsb, 3) }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">C. Net Weight of Flask, Loose Mix &amp; Water (gms)</td>
+            <td class="num">{{ fmt(superpave.weightFlaskWaterSampleA, 0) }}</td>
+            <td class="num">{{ fmt(superpave.weightFlaskWaterSampleB, 0) }}</td>
+            <td></td>
+            <td class="lbl">Ps =</td>
+            <td class="num">{{ fmt(ps, 2) }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">D. Maximum Theoretical Specific Gravity, Gmm (A/(A+B-C)</td>
+            <td class="num">{{ fmt(gmmA, 3) }}</td>
+            <td class="num">{{ fmt(gmmB, 3) }}</td>
+            <td></td>
+            <td class="lbl">Gse =</td>
+            <td class="num">{{ fmt(superpave.gse, 3) }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">E. Average Gmm</td>
+            <td class="num avg-ac" colspan="3">{{ fmt(gmmAvg, 3) }}</td>
+            <td class="lbl">Pba =</td>
+            <td class="num">{{ fmt(pba, 2) }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3"></td>
+            <td class="lbl">Pbe =</td>
+            <td class="num">{{ fmt(pbe, 2) }}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3"></td>
+            <td class="lbl">DP =</td>
+            <td class="num">{{ fmt(dp, 2) }} &nbsp; {{ superpave.dpLimits }}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested section-cell">
+        <div class="section-title">
+          EXTRACTION AND GRADATION
+          <span class="std">ASTM D2172/D2172M-17e1</span>
+        </div>
+        <table class="inner extract-wrap">
+          <tr>
+            <td class="nested-split">
+              <table class="inner data-table asphalt-content">
+                <tr>
+                  <th>ASPHALT CONTENT</th>
+                  <th>1</th>
+                </tr>
+                <tr>
+                  <td class="lbl">A. Wt. of Sample Before Test,gms</td>
+                  <td class="num">{{ fmt(superpave.bitumen?.weightSampleBefore, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">B. Wt. of Sample After Test, gms</td>
+                  <td class="num">{{ fmt(superpave.bitumen?.weightSampleAfter, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">C. Wt. of Filter Before Test, gms</td>
+                  <td class="num">{{ fmt(superpave.bitumen?.weightFilterBefore, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">D. Wt. of Filter After Test, gms</td>
+                  <td class="num">{{ fmt(superpave.bitumen?.weightFilterAfter, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">E. Wt. of Sample in Filter, gms</td>
+                  <td class="num">{{ fmt(filterSolids, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">F. Wt. of Total Agg. (B+E), gms</td>
+                  <td class="num">{{ fmt(totalAgg, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">G. Wt. of Bitumen, (A-F), gms</td>
+                  <td class="num">{{ fmt(bitumenWt, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">H. Percent AC (G/A x 100), %</td>
+                  <td class="num">{{ fmt(acPercent, 1) }} {{ superpave.percOfAcExpand }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">I. Average Asphalt Content %</td>
+                  <td class="num avg-ac">{{ fmt(acPercent, 1) }}</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Design</td>
+                  <td class="num">{{ superpave.bitumencontentLimits }}</td>
+                </tr>
+              </table>
+            </td>
+            <td class="nested-split">
+              <table class="inner data-table gradation-table">
+                <tr>
+                  <th>Oven Dry<br>gms</th>
+                  <th>Sieve<br>Size</th>
+                  <th>Weight<br>Ret. Gms.</th>
+                  <th>Cum. Wt.<br>Passing</th>
+                  <th>Percent<br>Passing</th>
+                  <th>expand<br>k*2</th>
+                  <th>J.M.F.</th>
+                  <th>Control<br>Point</th>
+                </tr>
+                <tr *ngFor="let s of sieves">
+                  <td></td>
+                  <td class="num">{{ s.size }}</td>
+                  <td class="num">{{ panBlank(s.key, superpave.superpaveGradation?.['cumRetained' + s.key], 1) }}</td>
+                  <td class="num">{{ panBlank(s.key, cumPassing(s.key), 1) }}</td>
+                  <td class="num">{{ panBlank(s.key, passing(s.key), 1) }}</td>
+                  <td class="num">{{ superpave.superpaveGradation?.['expand' + s.key] }}</td>
+                  <td class="num">{{ superpave.superpaveGradation?.['jmf' + s.key] }}</td>
+                  <td class="num">{{ superpave.superpaveGradation?.['controlPoint' + s.key] }}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner footer-table">
+          <tr>
+            <td class="remarks" colspan="3">Remarks : {{ superpave.notes }}</td>
+          </tr>
+          <tr class="sign-row">
+            <td>Tested By<br>{{ superpave.testBy }}</td>
+            <td>Checked By<br>{{ superpave.adopter }}</td>
+            <td>Approved By<br>{{ superpave.lastApproveBy }}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <div class="text-center" *ngIf="superpave.lastApproveBy && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN' || role == 'ROLE_DATAENTRY')">
+    <button (click)="generatePDF()">Download PDF</button>
+  </div>
+</div>

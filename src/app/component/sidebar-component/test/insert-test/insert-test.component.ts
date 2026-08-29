@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Project} from "../../../../model/project";
-import {Client} from "../../../../model/client";
 import {ProjectService} from "../../../../service/project/project.service";
-import {ClientService} from "../../../../service/client/client.service";
 import {Router} from "@angular/router";
 import {Test} from "../../../../model/test";
 import {TestService} from "../../../../service/test/test.service";
@@ -27,7 +25,6 @@ export class InsertTestComponent implements OnInit {
 
   test: Test = {project: {} as Project, testManager: {} as TestManager} as Test;
   price: number = 0;
-  showExtraFields: boolean = false;
   projects: Project[] = [];
   testManagers: TestManager[] = [];
 
@@ -40,29 +37,45 @@ export class InsertTestComponent implements OnInit {
     this.testManagerService.findAll().subscribe(res => this.testManagers = res);
   }
 
-  onSideChange(id: number) {
-    this.testManagerService.findById(id).subscribe(res => {
-      this.price = res.price;
-      this.test.price = res.price;
-      this.showExtraFields = id == 2;
-      if (!this.showExtraFields) {
-        this.test.contractor = '';
-        this.test.jobOrder = '';
-        this.test.asphaltApplier = '';
-      }
-    });
+  get showExtraFields(): boolean {
+    return this.isAsphaltOrSuperpave(this.test?.testManager);
+  }
+
+  onSideChange(id: number | string) {
+    const tm = this.testManagers.find(t => t.id == id);
+    if (!tm) {
+      return;
+    }
+    this.test.testManager = { ...this.test.testManager, id: tm.id, name: tm.name, price: tm.price };
+    this.price = tm.price;
+    this.test.price = tm.price;
+    if (!this.isAsphaltOrSuperpave(tm)) {
+      this.test.contractor = '';
+      this.test.jobOrder = '';
+      this.test.asphaltApplier = '';
+    }
+  }
+
+  private isAsphaltOrSuperpave(tm?: TestManager | null): boolean {
+    if (!tm) {
+      return false;
+    }
+    const listed = this.testManagers.find(t => t.id == tm.id);
+    const name = (listed?.name || tm.name || '').toLowerCase().replace(/\s+/g, '');
+    return Number(tm.id) === 2 || name.includes('asphaltmarshall') || name.includes('superpave');
   }
 
   insert() {
+    const tmId = Number(this.test.testManager?.id);
+    this.test.testManager = { ...(this.test.testManager || {} as TestManager), id: tmId };
+    this.test.price = this.price || this.test.price;
     this.service.insert(this.test).subscribe({
       next: () => {
         this.router.navigateByUrl('/tests');
       },
-      error: (err) => {
+      error: () => {
         this.router.navigateByUrl('/tests');
       }
     });
   }
-
-
 }

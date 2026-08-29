@@ -72,6 +72,18 @@ import {
 } from "./component/sidebar-component/analsis/moistureDensity-relationship/moisture-density-relationship-report/moisture-density-relationship-report.component";
 import {NotificationComponent} from "./component/sidebar-component/notification/notification/notification.component";
 import {DbBackupComponent} from "./component/sidebar-component/db-backup/db-backup.component";
+import {
+  ShowSuperpaveComponent
+} from "./component/sidebar-component/analsis/superpave/show-superpave/show-superpave.component";
+import {
+  InsertSuperpaveComponent
+} from "./component/sidebar-component/analsis/superpave/insert-superpave/insert-superpave.component";
+import {
+  UpdateSuperpaveComponent
+} from "./component/sidebar-component/analsis/superpave/update-superpave/update-superpave.component";
+import {
+  SuperpaveReportComponent
+} from "./component/sidebar-component/analsis/superpave/superpave-report/superpave-report.component";
 
 export const routes: Routes = [
 
@@ -118,6 +130,11 @@ export const routes: Routes = [
   { path: 'moisture-density-relationship/insert/:id', component: InsertMoistureDensityRelationshipComponent, canActivate: [authGuard] },
   { path: 'moisture-density-relationship/update/:id', component: UpdateMoistureDensityRelationshipComponent, canActivate: [authGuard] },
   { path: 'moisture-density-relationship/report/:id', component: MoistureDensityRelationshipReportComponent, canActivate: [authGuard] },
+
+  { path: 'superpave/:id', component: ShowSuperpaveComponent, canActivate: [authGuard] },
+  { path: 'superpave/insert/:id', component: InsertSuperpaveComponent, canActivate: [authGuard] },
+  { path: 'superpave/update/:id', component: UpdateSuperpaveComponent, canActivate: [authGuard] },
+  { path: 'superpave/report/:id', component: SuperpaveReportComponent, canActivate: [authGuard] },
 
   {path: 'report', component: TestReportComponent, canActivate: [authGuard]},
   {path: 'db-backup', component: DbBackupComponent, canActivate: [authGuard]},

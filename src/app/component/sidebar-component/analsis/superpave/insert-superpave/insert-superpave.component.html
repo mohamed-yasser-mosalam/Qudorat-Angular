@@ -1,0 +1,260 @@
+<div class="form-container">
+  <h1 class="header">
+    {{ currentStep === 1 ? 'EXTRACTION (BITUMEN)' : currentStep === 2 ? 'GRADATION' : 'SUPERPAVE (BWC)' }}
+  </h1>
+
+  <div class="step-indicator">
+    <span [class.active]="currentStep === 1">1. Extraction</span>
+    <span [class.active]="currentStep === 2">2. Gradation</span>
+    <span [class.active]="currentStep === 3">3. Superpave</span>
+  </div>
+
+  <form #form="ngForm" (submit)="insert()">
+    <div *ngIf="currentStep === 1" class="form-step">
+      <div class="bitumen-form-container">
+        <div class="form-group">
+          <label>A. Wt. of Sample Before Test (gms)</label>
+          <input type="number" class="form-control" [(ngModel)]="superpave.bitumen.weightSampleBefore"
+                 name="weightSampleBefore" required>
+        </div>
+        <div class="form-group">
+          <label>B. Wt. of Sample After Test (gms)</label>
+          <input type="number" class="form-control" [(ngModel)]="superpave.bitumen.weightSampleAfter"
+                 name="weightSampleAfter" required>
+        </div>
+        <div class="form-group">
+          <label>C. Wt. of Filter Before Test (gms)</label>
+          <input type="number" class="form-control" [(ngModel)]="superpave.bitumen.weightFilterBefore"
+                 name="weightFilterBefore" required>
+        </div>
+        <div class="form-group">
+          <label>D. Wt. of Filter After Test (gms)</label>
+          <input type="number" class="form-control" [(ngModel)]="superpave.bitumen.weightFilterAfter"
+                 name="weightFilterAfter" required>
+        </div>
+        <div class="form-group">
+          <label>Design AC (JMF)</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.bitumencontentLimits"
+                 name="bitumencontentLimits">
+        </div>
+        <div class="form-group">
+          <label>AC Expand (k=2)</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.percOfAcExpand" name="percOfAcExpand">
+        </div>
+        <div class="form-group">
+          <label>Equipment Used</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.bitumen.equipmentUsed"
+                 name="bitumenEquipmentUsed" maxlength="25">
+        </div>
+        <div class="form-group">
+          <label>Standard</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.bitumen.standard" name="bitumenStandard" required>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 2" class="form-step">
+      <div class="custom-inline-group">
+        <div class="form-group">
+          <label>Standard</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.superpaveGradation.standard"
+                 name="gradationStandard">
+        </div>
+      </div>
+      <p class="hint">Enter cumulative weight retained (gms), matching the Superpave worksheet column F.</p>
+      <div class="sieve-grid">
+        <div class="form-group"><label>Sieve Size</label></div>
+        <div class="form-group"><label>Cum. Wt. Retained (gms)</label></div>
+        <div class="form-group"><label>J.M.F.</label></div>
+        <div class="form-group"><label>Control Point</label></div>
+        <div class="form-group"><label>Expand k=2</label></div>
+
+        <ng-container *ngFor="let s of sieves">
+          <div class="form-group">
+            <input type="text" class="form-control" [value]="s.size" readonly>
+          </div>
+          <div class="form-group">
+            <input type="number" class="form-control"
+                   [(ngModel)]="superpave.superpaveGradation['cumRetained' + s.key]"
+                   [name]="'cumRetained' + s.key">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control"
+                   [(ngModel)]="superpave.superpaveGradation['jmf' + s.key]"
+                   [name]="'jmf' + s.key">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control"
+                   [(ngModel)]="superpave.superpaveGradation['controlPoint' + s.key]"
+                   [name]="'controlPoint' + s.key">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control"
+                   [(ngModel)]="superpave.superpaveGradation['expand' + s.key]"
+                   [name]="'expand' + s.key">
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 3" class="form-step">
+      <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+        <div>
+          <label>Request Description</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.requestDescription" name="requestDescription">
+        </div>
+        <div>
+          <label>Sample Date</label>
+          <input type="date" class="form-control" [(ngModel)]="superpave.sampleDate" name="sampleDate">
+        </div>
+        <div>
+          <label>Testing Date</label>
+          <input type="date" class="form-control" [(ngModel)]="superpave.testingDate" name="testingDate">
+        </div>
+        <div>
+          <label>Sample Type</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.sampleType" name="sampleType">
+        </div>
+        <div>
+          <label>Sample No</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.sampleNo" name="sampleNo">
+        </div>
+        <div>
+          <label>Sampled By</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.sampleBy" name="sampleBy">
+        </div>
+        <div>
+          <label>Asphalt Layer</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.asphaltLayer" name="asphaltLayer">
+        </div>
+        <div>
+          <label>Equipment Used</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.equipmentUsed" name="equipmentUsed">
+        </div>
+        <div>
+          <label>Report No</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.reportNo" name="reportNo">
+        </div>
+      </div>
+
+      <h4>Ndes specimens (AASHTO T166)</h4>
+      <div class="specimen-grid">
+        <div></div><div>Specimen 1</div><div>Specimen 2</div>
+        <label>A. Weight in Air, Dry (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirDryA" name="weightAirDryA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirDryB" name="weightAirDryB">
+        <label>B. Weight in Air, SSD (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirSsdA" name="weightAirSsdA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirSsdB" name="weightAirSsdB">
+        <label>C. Weight in Water (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightWaterA" name="weightWaterA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightWaterB" name="weightWaterB">
+        <label>Height &#64; Nini</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNiniA" name="heightNiniA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNiniB" name="heightNiniB">
+        <label>Height &#64; Ndes</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNdesA" name="heightNdesA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNdesB" name="heightNdesB">
+        <label>Height &#64; Nmax</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNmaxA" name="heightNmaxA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNmaxB" name="heightNmaxB">
+      </div>
+
+      <h4>Nmax specimens (AASHTO T166)</h4>
+      <div class="specimen-grid">
+        <div></div><div>Specimen 1</div><div>Specimen 2</div>
+        <label>A. Weight in Air, Dry (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirDryC" name="weightAirDryC">
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirDryD" name="weightAirDryD">
+        <label>B. Weight in Air, SSD (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirSsdC" name="weightAirSsdC">
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightAirSsdD" name="weightAirSsdD">
+        <label>C. Weight in Water (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightWaterC" name="weightWaterC">
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightWaterD" name="weightWaterD">
+        <label>Height &#64; Nini</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNiniC" name="heightNiniC">
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNiniD" name="heightNiniD">
+        <label>Height &#64; Ndes</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNdesC" name="heightNdesC">
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNdesD" name="heightNdesD">
+        <label>Height &#64; Nmax</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNmaxC" name="heightNmaxC">
+        <input type="number" class="form-control" [(ngModel)]="superpave.heightNmaxD" name="heightNmaxD">
+      </div>
+
+      <h4>Maximum Theoretical Specific Gravity Gmm (ASTM D2041)</h4>
+      <div class="specimen-grid">
+        <div></div><div>Specimen 1</div><div>Specimen 2</div>
+        <label>A. Net Weight of Loose Mix (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.netWeightOfLooseMixA" name="netWeightOfLooseMixA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.netWeightOfLooseMixB" name="netWeightOfLooseMixB">
+        <label>B. Net Weight of Flask &amp; Water (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.netWeightOfFlaskWaterA" name="netWeightOfFlaskWaterA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.netWeightOfFlaskWaterB" name="netWeightOfFlaskWaterB">
+        <label>C. Net Weight of Flask, Loose Mix &amp; Water (gms)</label>
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightFlaskWaterSampleA" name="weightFlaskWaterSampleA">
+        <input type="number" class="form-control" [(ngModel)]="superpave.weightFlaskWaterSampleB" name="weightFlaskWaterSampleB">
+      </div>
+
+      <div class="constants-row">
+        <div class="form-group">
+          <label>Gb</label>
+          <input type="number" class="form-control" [(ngModel)]="superpave.gb" name="gb" step="0.001">
+        </div>
+        <div class="form-group">
+          <label>Gsb</label>
+          <input type="number" class="form-control" [(ngModel)]="superpave.gsb" name="gsb" step="0.001">
+        </div>
+        <div class="form-group">
+          <label>Gse</label>
+          <input type="number" class="form-control" [(ngModel)]="superpave.gse" name="gse" step="0.001">
+        </div>
+      </div>
+
+      <h4>Specification limits</h4>
+      <div class="constants-row">
+        <div class="form-group">
+          <label>% Gmm &#64; Nini</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.gmmNiniLimits" name="gmmNiniLimits">
+        </div>
+        <div class="form-group">
+          <label>% Gmm &#64; Ndes</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.gmmNdesLimits" name="gmmNdesLimits">
+        </div>
+        <div class="form-group">
+          <label>% Gmm &#64; Nmax</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.gmmNmaxLimits" name="gmmNmaxLimits">
+        </div>
+        <div class="form-group">
+          <label>Air Voids %</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.airvoidsLimits" name="airvoidsLimits">
+        </div>
+        <div class="form-group">
+          <label>VMA %</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.vmaLimits" name="vmaLimits">
+        </div>
+        <div class="form-group">
+          <label>VF %</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.vfLimits" name="vfLimits">
+        </div>
+        <div class="form-group">
+          <label>DP</label>
+          <input type="text" class="form-control" [(ngModel)]="superpave.dpLimits" name="dpLimits">
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>Remarks</label>
+        <textarea class="form-control" [(ngModel)]="superpave.notes" name="notes" rows="5"
+                  (input)="limitLiness($event, 9)"></textarea>
+      </div>
+    </div>
+
+    <div class="navigation-buttons">
+      <button type="button" class="btn btn-secondary" *ngIf="currentStep > 1" (click)="prevStep()">Previous</button>
+      <button type="button" class="btn btn-primary" *ngIf="currentStep < 3" (click)="nextStep()">Next</button>
+      <button type="submit" class="btn btn-success" *ngIf="currentStep === 3">Save</button>
+    </div>
+  </form>
+</div>

@@ -5,6 +5,7 @@ import {Asphalt} from "./asphalt";
 import {CompressiveStrength} from "./compressive-strength";
 import {AtterbergLimits} from "./atterberg-limits";
 import {MoistureDensityRelationship} from "./moisture-density-relationship";
+import {Superpave} from "./superpave";
 
 export interface Test {
 approved: any;
@@ -26,6 +27,7 @@ approved: any;
   compressiveStrengths: CompressiveStrength[];
   atterbergLimits: AtterbergLimits[];
   moistureDensityRelationships: MoistureDensityRelationship[];
+  superpaves: Superpave[];
 
   status: string;
   name: string;
