@@ -314,7 +314,7 @@ export class SuperpaveReportComponent implements OnInit {
           ['Asphalt Supplier', s.asphaltApplier || '', 'Sample No', s.sampleNo || ''],
           ['Request Description', s.requestDescription || '', 'Sampled By', s.sampleBy || ''],
           ['Report No.', s.reportNo || '', 'Asphalt Layer', s.asphaltLayer || ''],
-          ['Location', s.location || '', 'Report Date', this.formatDate(s.reportDate)]
+          ['Location', s.location || '', '', '']
         ],
         ...grid,
         styles: {...grid.styles, fontSize: 7},
@@ -489,6 +489,19 @@ export class SuperpaveReportComponent implements OnInit {
       doc.rect(boxLeft, boxTop, boxWidth, boxBottom - boxTop);
 
       doc.addImage(tail, 'PNG', 0, tailY, 210, 33);
+
+      doc.setFontSize(5);
+      const formatDateTime = (date: Date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+      };
+      const currentDateTime = formatDateTime(new Date());
+      doc.text(`Report Date: ${currentDateTime}`, 1, 290);
+
       doc.save(`SuperpaveReport_${s.reportNo || s.id}.pdf`);
     };
   }
