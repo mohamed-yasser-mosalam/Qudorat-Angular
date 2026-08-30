@@ -86,7 +86,7 @@ export class CompressiveStrengthReportComponent implements OnInit {
     const tail = new Image();
     const qr = new Image();
     head.src = 'assets/ApproveHead.png';
-    tail.src = 'assets/tail.png';
+    tail.src = 'assets/tail.jpeg';
     qr.src = 'assets/barcode.jpg';
 
     head.onload = () => {

@@ -181,7 +181,7 @@ export class MoistureDensityRelationshipReportComponent implements OnInit {
     const tail = new Image();
 
     head.src = 'assets/head.png';
-    tail.src = 'assets/tail.png';
+    tail.src = 'assets/tail.jpeg';
 
     // Check if column E should be hidden
     const hideColumnE = this.moistureDensityRelationship.wetWtSoilMouldE == 0 &&

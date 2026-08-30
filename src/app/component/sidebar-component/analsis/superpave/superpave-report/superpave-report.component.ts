@@ -259,7 +259,7 @@ export class SuperpaveReportComponent implements OnInit {
     const head = new Image();
     const tail = new Image();
     head.src = 'assets/head.png';
-    tail.src = 'assets/tail.png';
+    tail.src = 'assets/tail.jpeg';
     const s = this.superpave;
     const center = {halign: 'center' as const, valign: 'middle' as const};
 

@@ -342,9 +342,9 @@ const specs = [
 
     if (sieveName === '#200') {
       if (num < 10) {
-        return num.toFixed(1);    
+        return num.toFixed(1);
       } else {
-        return Math.round(num).toString();  
+        return Math.round(num).toString();
       }
     }
 
@@ -372,7 +372,7 @@ const specs = [
     const qr = new Image();
 
     head.src = 'assets/ApproveHead.png';
-    tail.src = 'assets/tail.png';
+    tail.src = 'assets/tail.jpeg';
     qr.src = 'assets/barcode.jpg';
 
     head.onload = () => {
