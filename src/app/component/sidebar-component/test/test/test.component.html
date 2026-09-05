@@ -45,7 +45,7 @@
           <span *ngIf="test.approver">{{test.approver}}</span>
         </td>
         <td>{{ test.date }}</td>
-        <td>{{ (test.sieveAnalyses?.length || 0) + (test.asphalts?.length || 0) + (test.compressiveStrengths?.length || 0) + (test.atterbergLimits?.length || 0) + (test.moistureDensityRelationships?.length || 0) + (test.superpaves?.length || 0) }}</td>
+        <td>{{ (test.sieveAnalyses?.length || 0) + (test.asphalts?.length || 0) + (test.compressiveStrengths?.length || 0) + (test.atterbergLimits?.length || 0) + (test.moistureDensityRelationships?.length || 0) + (test.superpaves?.length || 0) + (test.enCompressiveStrengths?.length || 0) }}</td>
         <td >
           <a href="javascript:void(0)">
             <svg (click)="goToTrail(test.id, test.testManager.id, test.testManager.name); $event.preventDefault()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"

@@ -84,6 +84,18 @@ import {
 import {
   SuperpaveReportComponent
 } from "./component/sidebar-component/analsis/superpave/superpave-report/superpave-report.component";
+import {
+  ShowEnCompressiveStrengthComponent
+} from "./component/sidebar-component/analsis/en-compressive-strength/show-en-compressive-strength/show-en-compressive-strength.component";
+import {
+  InsertEnCompressiveStrengthComponent
+} from "./component/sidebar-component/analsis/en-compressive-strength/insert-en-compressive-strength/insert-en-compressive-strength.component";
+import {
+  UpdateEnCompressiveStrengthComponent
+} from "./component/sidebar-component/analsis/en-compressive-strength/update-en-compressive-strength/update-en-compressive-strength.component";
+import {
+  EnCompressiveStrengthReportComponent
+} from "./component/sidebar-component/analsis/en-compressive-strength/en-compressive-strength-report/en-compressive-strength-report.component";
 
 export const routes: Routes = [
 
@@ -135,6 +147,11 @@ export const routes: Routes = [
   { path: 'superpave/insert/:id', component: InsertSuperpaveComponent, canActivate: [authGuard] },
   { path: 'superpave/update/:id', component: UpdateSuperpaveComponent, canActivate: [authGuard] },
   { path: 'superpave/report/:id', component: SuperpaveReportComponent, canActivate: [authGuard] },
+
+  { path: 'en-compressive-strength/:id', component: ShowEnCompressiveStrengthComponent, canActivate: [authGuard] },
+  { path: 'en-compressive-strength/insert/:id', component: InsertEnCompressiveStrengthComponent, canActivate: [authGuard] },
+  { path: 'en-compressive-strength/update/:id', component: UpdateEnCompressiveStrengthComponent, canActivate: [authGuard] },
+  { path: 'en-compressive-strength/report/:id', component: EnCompressiveStrengthReportComponent, canActivate: [authGuard] },
 
   {path: 'report', component: TestReportComponent, canActivate: [authGuard]},
   {path: 'db-backup', component: DbBackupComponent, canActivate: [authGuard]},

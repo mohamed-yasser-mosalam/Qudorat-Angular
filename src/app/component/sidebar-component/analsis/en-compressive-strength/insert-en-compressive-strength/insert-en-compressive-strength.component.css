@@ -1,0 +1,68 @@
+.form-container {
+  margin-left: 260px;
+  padding: 80px 15px 0 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.head {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-row {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 170px;
+  margin-bottom: 2px;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+  margin: 6px auto 4px auto;
+  display: block;
+  padding: 5px 14px;
+  font-size: 13px;
+}
+
+.bitumen-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 auto;
+}
+
+.compact-input {
+  height: 28px;
+  padding: 3px 6px;
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+
+.col-form-label {
+  margin-bottom: 1px;
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.d-flex {
+  margin-bottom: 3px;
+}

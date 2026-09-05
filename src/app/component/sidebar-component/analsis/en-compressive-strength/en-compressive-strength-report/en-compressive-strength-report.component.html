@@ -1,0 +1,159 @@
+<div class="invoice-container" *ngIf="loaded">
+  <table class="report-frame">
+    <tr>
+      <th class="main-title">Test Method: BS EN 12390-3:2019 — Compressive strength of test specimens.</th>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner head-table">
+          <tr>
+            <td class="lbl">Project :</td>
+            <td>{{ entity.projectName }}</td>
+            <td class="lbl">Structure :</td>
+            <td>{{ entity.structure }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Company :</td>
+            <td>{{ entity.company }}</td>
+            <td class="lbl">Sample by :</td>
+            <td>{{ entity.sampleBy }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Location :</td>
+            <td>{{ entity.location }}</td>
+            <td class="lbl">Slump (mm)</td>
+            <td>{{ entity.slump }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Date Casting :</td>
+            <td>{{ formatDate(entity.dataCasting) }}</td>
+            <td class="lbl">Temperature (°C)</td>
+            <td>{{ fmt(entity.temperature, 1) }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Date Received :</td>
+            <td>{{ formatDate(entity.dataReceived) }}</td>
+            <td class="lbl">Req. Strength for 28 Days (kg/cm²)</td>
+            <td>{{ entity.reqstrengthKg || '' }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Testing &#64;</td>
+            <td>{{ entity.ageDays }}</td>
+            <td class="lbl">Req. Strength for 28 Days (Mpa)</td>
+            <td>{{ reqMpa() }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Days Date</td>
+            <td>{{ testDate }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="lbl">Lab. Report No. #</td>
+            <td>{{ entity.labreportNo }}</td>
+            <td class="lbl">Sample No .</td>
+            <td>{{ entity.sampleNo }}</td>
+          </tr>
+          <tr>
+            <td class="lbl">Type of Sample :</td>
+            <td>{{ entity.typeofSample }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner data-table">
+          <tr>
+            <th>Sample ID. #</th>
+            <th>Width (cm)</th>
+            <th>Length (cm)</th>
+            <th>Area (cm²)</th>
+            <th>Age in Days</th>
+            <th>Weight Sample (gm)</th>
+            <th>Unit Mass (gm/cc)</th>
+            <th>Test Load (KN)</th>
+            <th>Test Load (KG)</th>
+            <th>Compressive Strength (kg/cm²)</th>
+            <th>Avg. Comp. Strength (kg/cm²)</th>
+            <th>Compressive Strength (Mpa)</th>
+            <th>Avg. Comp. Strength (Mpa)</th>
+          </tr>
+          <tr *ngFor="let row of rows; let i = index">
+            <td class="num">{{ row.sampleId }}</td>
+            <td class="num">{{ fmt(row.width, 0) }}</td>
+            <td class="num">{{ fmt(row.length, 0) }}</td>
+            <td class="num">{{ fmt(row.area, 0) }}</td>
+            <td class="num">{{ entity.ageDays }}</td>
+            <td class="num">{{ fmt(row.weight, 0) }}</td>
+            <td class="num">{{ fmt(row.unitMass, 3) }}</td>
+            <td class="num">{{ fmt(row.loadKn, 0) }}</td>
+            <td class="num">{{ fmt(row.loadKg, 2) }}</td>
+            <td class="num">{{ fmt(row.strengthKg, 2) }}</td>
+            <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">{{ fmt(avgKg, 2) }}</td>
+            <td class="num">{{ fmt(row.strengthMpa, 2) }}</td>
+            <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">{{ fmt(avgMpa, 2) }}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner remarks-table">
+          <tr>
+            <td class="remark-lbl">Remarks :</td>
+            <td class="remark-val" [style.min-height.px]="remarksMinHeight()">{{ entity.notes }}</td>
+          </tr>
+          <tr>
+            <td class="remark-lbl">1-</td>
+            <td class="remark-val">{{ remarkLines[0] }}</td>
+          </tr>
+          <tr>
+            <td class="remark-lbl">2-</td>
+            <td class="remark-val">{{ remarkLines[1] }}</td>
+          </tr>
+          <tr>
+            <td class="remark-lbl">3-</td>
+            <td class="remark-val">{{ remarkLines[2] }}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner fracture-table">
+          <tr>
+            <th class="section-title">Fracture Type</th>
+          </tr>
+          <tr>
+            <td class="fracture-cell">
+              <img src="assets/en-fracture-types.jpg" alt="Fracture Type">
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="nested">
+        <table class="inner footer-table">
+          <tr class="sign-row">
+            <td>Test by:<br>{{ entity.testBy }}</td>
+            <td>Checked by:<br>{{ entity.adopter }}</td>
+            <td>Approved by:<br>{{ entity.lastApproveBy }}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <div class="text-center" *ngIf="entity.lastApproveBy && (role == 'ROLE_MANAGER' || role == 'ROLE_ADMIN' || role == 'ROLE_DATAENTRY')">
+    <button class="btn btn-success" (click)="generatePDF()">Download Pdf</button>
+  </div>
+</div>

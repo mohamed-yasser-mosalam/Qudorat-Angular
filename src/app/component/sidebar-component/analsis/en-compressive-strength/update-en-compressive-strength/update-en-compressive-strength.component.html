@@ -1,0 +1,217 @@
+<div class="form-container">
+  <h1 class="header">Compressive strength of test specimens (BS EN 12390-3)</h1>
+  <form #form="ngForm" (submit)="update()">
+    <div class="form-step">
+      <div class="bitumen-form-container">
+
+        <div class="d-flex align-items-center gap-1 mb-1">
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Date Casting</label>
+            <input type="date" class="form-control compact-input"
+                   [(ngModel)]="entity.dataCasting" name="dataCasting" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Date Received</label>
+            <input type="date" class="form-control compact-input"
+                   [(ngModel)]="entity.dataReceived" name="dataReceived" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Testing &#64; Days</label>
+            <input type="number" class="form-control compact-input"
+                   [(ngModel)]="entity.ageDays" name="ageDays" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Lab. Report No.</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="entity.labreportNo" name="labreportNo" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Type of Sample</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="entity.typeofSample" name="typeofSample" required>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-1 mb-1">
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Structure</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="entity.structure" name="structure">
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Sample By</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="entity.sampleBy" name="sampleBy" required>
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Slump (mm)</label>
+            <input type="number" class="form-control compact-input"
+                   [(ngModel)]="entity.slump" name="slump">
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Temperature (°C)</label>
+            <input type="number" step="0.1" class="form-control compact-input"
+                   [(ngModel)]="entity.temperature" name="temperature">
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Req. Strength for 28 Days (kg/cm²)</label>
+            <input type="number" class="form-control compact-input"
+                   [(ngModel)]="entity.reqstrengthKg" name="reqstrengthKg">
+          </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Sample No.</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="entity.sampleNo" name="sampleNo">
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center mb-1">
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Remarks</label>
+            <textarea class="form-control compact-input"
+                      [(ngModel)]="entity.notes" name="notes"
+                      style="width: 1010px; height: 80px;"></textarea>
+          </div>
+        </div>
+
+        <h3 class="head">Cubes</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample ID</label>
+            <input type="text" class="form-control compact-input" [(ngModel)]="entity.sampleIdA" name="sampleIdA" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Width (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.widthA" name="widthA" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Length (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.lengthA" name="lengthA" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight Sample (gm)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleA" name="weightSampleA" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Test Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknA" name="testLoadknA" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample ID</label>
+            <input type="text" class="form-control compact-input" [(ngModel)]="entity.sampleIdB" name="sampleIdB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Width (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.widthB" name="widthB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Length (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.lengthB" name="lengthB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight Sample (gm)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleB" name="weightSampleB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Test Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknB" name="testLoadknB" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample ID</label>
+            <input type="text" class="form-control compact-input" [(ngModel)]="entity.sampleIdC" name="sampleIdC" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Width (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.widthC" name="widthC" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Length (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.lengthC" name="lengthC" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight Sample (gm)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleC" name="weightSampleC" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Test Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknC" name="testLoadknC" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample ID</label>
+            <input type="text" class="form-control compact-input" [(ngModel)]="entity.sampleIdD" name="sampleIdD" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Width (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.widthD" name="widthD" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Length (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.lengthD" name="lengthD" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight Sample (gm)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleD" name="weightSampleD" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Test Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknD" name="testLoadknD" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample ID</label>
+            <input type="text" class="form-control compact-input" [(ngModel)]="entity.sampleIdE" name="sampleIdE" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Width (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.widthE" name="widthE" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Length (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.lengthE" name="lengthE" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight Sample (gm)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleE" name="weightSampleE" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Test Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknE" name="testLoadknE" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="col-form-label">Sample ID</label>
+            <input type="text" class="form-control compact-input" [(ngModel)]="entity.sampleIdF" name="sampleIdF" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Width (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.widthF" name="widthF" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Length (cm)</label>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.lengthF" name="lengthF" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Weight Sample (gm)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleF" name="weightSampleF" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Test Load (kN)</label>
+            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknF" name="testLoadknF" required>
+          </div>
+        </div>
+
+        <div class="navigation-buttons">
+          <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Update</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

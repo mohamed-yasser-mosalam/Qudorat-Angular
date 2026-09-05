@@ -72,8 +72,13 @@ export class TestComponent implements OnInit {
     const name = (managerName || '').toLowerCase();
     const id = String(testId || '');
 
-    if (name.replace(/\s+/g, '').includes('superpave') || id.startsWith('SP-')) {
+    const compact = name.replace(/\s+/g, '');
+    if (compact.includes('superpave') || id.startsWith('SP-')) {
       this.router.navigate([`/superpave/${testId}`]);
+      return;
+    }
+    if (compact.includes('12390') || compact.includes('testspecimens') || id.startsWith('EN-')) {
+      this.router.navigate([`/en-compressive-strength/${testId}`]);
       return;
     }
     if (managerId == 1 || id.startsWith('SO-')) {

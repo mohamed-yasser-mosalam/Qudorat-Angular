@@ -1,0 +1,151 @@
+.invoice-container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 70px 12px 40px 12px;
+}
+
+.report-frame {
+  width: 100%;
+  border: 2px solid #000;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.report-frame > tr > .main-title,
+.report-frame > tbody > tr > .main-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 17px;
+  padding: 10px 6px;
+  border: none;
+  border-bottom: 1px solid #000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: #fff;
+}
+
+.report-frame > tbody > tr > td.nested {
+  border: none;
+  padding: 0;
+  vertical-align: top;
+}
+
+.inner {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.inner td,
+.inner th {
+  border: 1px solid #000;
+  padding: 5px 6px;
+  font-size: 13px;
+}
+
+.data-table th,
+.data-table td {
+  font-size: 14px;
+  padding: 8px 5px;
+}
+
+.data-table th {
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.inner th {
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+td.lbl {
+  text-align: left;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+td.num {
+  text-align: center;
+}
+
+td.avg {
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.head-table td:nth-child(even) {
+  text-align: center;
+}
+
+.head-table .lbl {
+  width: 22%;
+}
+
+.remarks-table .remark-lbl {
+  width: 88px;
+  text-align: left;
+  vertical-align: top;
+  font-weight: 600;
+  white-space: nowrap;
+  border-right: 1px solid #000;
+}
+
+.remarks-table .remark-val {
+  text-align: left;
+  vertical-align: top;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.fracture-table .fracture-cell {
+  text-align: center;
+  padding: 6px 4px;
+}
+
+.fracture-table .fracture-cell img {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 8px;
+}
+
+.sign-row td {
+  text-align: center;
+  height: 52px;
+  vertical-align: top;
+  width: 33.33%;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #218838;
+}
+
+@media print {
+  .invoice-container {
+    padding-top: 20px;
+  }
+
+  button {
+    display: none;
+  }
+}
