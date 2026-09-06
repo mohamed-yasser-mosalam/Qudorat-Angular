@@ -46,20 +46,14 @@
           <tr>
             <td class="lbl">Days Date</td>
             <td>{{ testDate }}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="lbl">Lab. Report No. #</td>
-            <td>{{ entity.labreportNo }}</td>
             <td class="lbl">Sample No .</td>
             <td>{{ entity.sampleNo }}</td>
           </tr>
           <tr>
+            <td class="lbl">Lab. Report No. #</td>
+            <td>{{ entity.labreportNo }}</td>
             <td class="lbl">Type of Sample :</td>
             <td>{{ entity.typeofSample }}</td>
-            <td></td>
-            <td></td>
           </tr>
         </table>
       </td>
@@ -82,21 +76,23 @@
             <th>Avg. Comp. Strength (kg/cm²)</th>
             <th>Compressive Strength (Mpa)</th>
             <th>Avg. Comp. Strength (Mpa)</th>
+            <th>Avg. Comp. Strength (Mpa) with exp u k=2</th>
           </tr>
           <tr *ngFor="let row of rows; let i = index">
             <td class="num">{{ row.sampleId }}</td>
-            <td class="num">{{ fmt(row.width, 0) }}</td>
-            <td class="num">{{ fmt(row.length, 0) }}</td>
-            <td class="num">{{ fmt(row.area, 0) }}</td>
+            <td class="num">{{ dec(row.width, 2) }}</td>
+            <td class="num">{{ dec(row.length, 2) }}</td>
+            <td class="num">{{ dec(row.area, 2) }}</td>
             <td class="num">{{ entity.ageDays }}</td>
-            <td class="num">{{ fmt(row.weight, 0) }}</td>
+            <td class="num">{{ dec(row.weight, 2) }}</td>
             <td class="num">{{ fmt(row.unitMass, 3) }}</td>
-            <td class="num">{{ fmt(row.loadKn, 0) }}</td>
+            <td class="num">{{ dec(row.loadKn, 2) }}</td>
             <td class="num">{{ fmt(row.loadKg, 2) }}</td>
             <td class="num">{{ fmt(row.strengthKg, 2) }}</td>
             <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">{{ fmt(avgKg, 2) }}</td>
             <td class="num">{{ fmt(row.strengthMpa, 2) }}</td>
             <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">{{ fmt(avgMpa, 2) }}</td>
+            <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">± {{ entity.expAvg }}</td>
           </tr>
         </table>
       </td>

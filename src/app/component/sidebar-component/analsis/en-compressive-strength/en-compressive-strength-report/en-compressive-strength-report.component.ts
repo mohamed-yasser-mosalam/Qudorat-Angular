@@ -68,6 +68,13 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
     return Number(n).toFixed(d);
   }
 
+  dec(n: number | undefined | null, max = 2): string {
+    if (n == null || isNaN(Number(n))) {
+      return '';
+    }
+    return Number(Number(n).toFixed(max)).toString();
+  }
+
   formatDate(value: string | undefined | null): string {
     if (!value) {
       return '';
@@ -215,9 +222,8 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
           ['Date Casting :', this.formatDate(e.dataCasting), 'Temperature (°C)', this.fmt(e.temperature, 1)],
           ['Date Received :', this.formatDate(e.dataReceived), 'Req. Strength for 28 Days (kg/cm²)', e.reqstrengthKg ? String(e.reqstrengthKg) : ''],
           ['Testing @', e.ageDays != null ? String(e.ageDays) : '', 'Req. Strength for 28 Days (Mpa)', this.reqMpa()],
-          ['Days Date', this.testDate, '', ''],
-          ['Lab. Report No. #', e.labreportNo || '', 'Sample No .', e.sampleNo || ''],
-          ['Type of Sample :', e.typeofSample || '', '', '']
+          ['Days Date', this.testDate, 'Sample No .', e.sampleNo || ''],
+          ['Lab. Report No. #', e.labreportNo || '', 'Type of Sample :', e.typeofSample || '']
         ],
         ...grid,
         styles: {...grid.styles, fontSize: 8},
@@ -232,13 +238,13 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
       const body = this.rows.map((row, index) => {
         const cells: any[] = [
           num(row.sampleId),
-          num(this.fmt(row.width, 0)),
-          num(this.fmt(row.length, 0)),
-          num(this.fmt(row.area, 0)),
+          num(this.dec(row.width, 2)),
+          num(this.dec(row.length, 2)),
+          num(this.dec(row.area, 2)),
           num(String(e.ageDays || '')),
-          num(this.fmt(row.weight, 0)),
+          num(this.dec(row.weight, 2)),
           num(this.fmt(row.unitMass, 3)),
-          num(this.fmt(row.loadKn, 0)),
+          num(this.dec(row.loadKn, 2)),
           num(this.fmt(row.loadKg, 2)),
           num(this.fmt(row.strengthKg, 2))
         ];
@@ -248,6 +254,7 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
         cells.push(num(this.fmt(row.strengthMpa, 2)));
         if (index === 0) {
           cells.push({content: this.fmt(this.avgMpa, 2), rowSpan: 6, styles: center});
+          cells.push({content: e.expAvg ? `± ${e.expAvg}` : '', rowSpan: 6, styles: center});
         }
         return cells;
       });
@@ -267,7 +274,8 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
           {content: 'Compressive Strength (kg/cm²)', styles: center},
           {content: 'Avg. Comp. Strength (kg/cm²)', styles: center},
           {content: 'Compressive Strength (Mpa)', styles: center},
-          {content: 'Avg. Comp. Strength (Mpa)', styles: center}
+          {content: 'Avg. Comp. Strength (Mpa)', styles: center},
+          {content: 'Avg. Comp. Strength (Mpa) with exp u k=2', styles: center}
         ]],
         body,
         ...grid,

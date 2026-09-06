@@ -25,11 +25,6 @@
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="entity.labreportNo" name="labreportNo" required>
           </div>
-          <div class="align-items-center">
-            <label class="col-form-label me-1">Type of Sample</label>
-            <input type="text" class="form-control compact-input"
-                   [(ngModel)]="entity.typeofSample" name="typeofSample" required>
-          </div>
         </div>
 
         <div class="d-flex align-items-center gap-1 mb-1">
@@ -63,6 +58,11 @@
             <input type="text" class="form-control compact-input"
                    [(ngModel)]="entity.sampleNo" name="sampleNo">
           </div>
+          <div class="align-items-center">
+            <label class="col-form-label me-1">Type of Sample</label>
+            <input type="text" class="form-control compact-input"
+                   [(ngModel)]="entity.typeofSample" name="typeofSample" required>
+          </div>
         </div>
 
         <div class="d-flex align-items-center mb-1">
@@ -90,11 +90,15 @@
           </div>
           <div class="form-group">
             <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleA" name="weightSampleA" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.weightSampleA" name="weightSampleA" required>
           </div>
           <div class="form-group">
             <label class="col-form-label">Test Load (kN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknA" name="testLoadknA" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.testLoadknA" name="testLoadknA" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Avg. Comp. Strength (Mpa) exp</label>
+            <input type="text" class="form-control compact-input" [(ngModel)]="entity.expAvg" name="expAvg">
           </div>
         </div>
         <div class="form-row">
@@ -112,11 +116,15 @@
           </div>
           <div class="form-group">
             <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleB" name="weightSampleB" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.weightSampleB" name="weightSampleB" required>
           </div>
           <div class="form-group">
             <label class="col-form-label">Test Load (kN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknB" name="testLoadknB" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.testLoadknB" name="testLoadknB" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Avg. Comp. Strength (Mpa) exp</label>
+            <input type="text" class="form-control compact-input" [ngModel]="entity.expAvg" name="expAvgB" disabled>
           </div>
         </div>
         <div class="form-row">
@@ -134,11 +142,15 @@
           </div>
           <div class="form-group">
             <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleC" name="weightSampleC" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.weightSampleC" name="weightSampleC" required>
           </div>
           <div class="form-group">
             <label class="col-form-label">Test Load (kN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknC" name="testLoadknC" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.testLoadknC" name="testLoadknC" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Avg. Comp. Strength (Mpa) exp</label>
+            <input type="text" class="form-control compact-input" [ngModel]="entity.expAvg" name="expAvgC" disabled>
           </div>
         </div>
         <div class="form-row">
@@ -156,11 +168,15 @@
           </div>
           <div class="form-group">
             <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleD" name="weightSampleD" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.weightSampleD" name="weightSampleD" required>
           </div>
           <div class="form-group">
             <label class="col-form-label">Test Load (kN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknD" name="testLoadknD" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.testLoadknD" name="testLoadknD" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Avg. Comp. Strength (Mpa) exp</label>
+            <input type="text" class="form-control compact-input" [ngModel]="entity.expAvg" name="expAvgD" disabled>
           </div>
         </div>
         <div class="form-row">
@@ -178,11 +194,15 @@
           </div>
           <div class="form-group">
             <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleE" name="weightSampleE" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.weightSampleE" name="weightSampleE" required>
           </div>
           <div class="form-group">
             <label class="col-form-label">Test Load (kN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknE" name="testLoadknE" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.testLoadknE" name="testLoadknE" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Avg. Comp. Strength (Mpa) exp</label>
+            <input type="text" class="form-control compact-input" [ngModel]="entity.expAvg" name="expAvgE" disabled>
           </div>
         </div>
         <div class="form-row">
@@ -200,11 +220,15 @@
           </div>
           <div class="form-group">
             <label class="col-form-label">Weight Sample (gm)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.weightSampleF" name="weightSampleF" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.weightSampleF" name="weightSampleF" required>
           </div>
           <div class="form-group">
             <label class="col-form-label">Test Load (kN)</label>
-            <input type="number" class="form-control compact-input" [(ngModel)]="entity.testLoadknF" name="testLoadknF" required>
+            <input type="number" step="0.1" class="form-control compact-input" [(ngModel)]="entity.testLoadknF" name="testLoadknF" required>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Avg. Comp. Strength (Mpa) exp</label>
+            <input type="text" class="form-control compact-input" [ngModel]="entity.expAvg" name="expAvgF" disabled>
           </div>
         </div>
 
