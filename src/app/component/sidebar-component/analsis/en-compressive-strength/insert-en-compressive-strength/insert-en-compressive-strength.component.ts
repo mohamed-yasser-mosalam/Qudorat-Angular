@@ -19,7 +19,7 @@ export class InsertEnCompressiveStrengthComponent {
   id: number = 0;
   entity: EnCompressiveStrength = {
     test: {} as Test,
-    typeofSample: 'Con. Cube 15 × 15 × 15 (cm)',
+    sampleType: '',
     ageDays: 28
   } as EnCompressiveStrength;
 

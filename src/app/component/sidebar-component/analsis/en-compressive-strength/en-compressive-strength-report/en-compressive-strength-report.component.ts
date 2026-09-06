@@ -223,7 +223,7 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
           ['Date Received :', this.formatDate(e.dataReceived), 'Req. Strength for 28 Days (kg/cm²)', e.reqstrengthKg ? String(e.reqstrengthKg) : ''],
           ['Testing @', e.ageDays != null ? String(e.ageDays) : '', 'Req. Strength for 28 Days (Mpa)', this.reqMpa()],
           ['Days Date', this.testDate, 'Sample No .', e.sampleNo || ''],
-          ['Lab. Report No. #', e.labreportNo || '', 'Type of Sample :', e.typeofSample || '']
+          ['Lab. Report No. #', e.labreportNo || '', 'Type of Sample :', e.sampleType || '']
         ],
         ...grid,
         styles: {...grid.styles, fontSize: 8},

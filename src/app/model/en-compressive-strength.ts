@@ -17,6 +17,7 @@ export interface EnCompressiveStrength {
   temperature: number;
   reqstrengthKg: number;
   sampleNo: string;
+  sampleType: string;
   notes: string;
 
   sampleIdA: string;
