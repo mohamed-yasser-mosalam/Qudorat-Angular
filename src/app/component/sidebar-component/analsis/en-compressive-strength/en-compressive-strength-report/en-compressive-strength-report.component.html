@@ -93,10 +93,13 @@
             <td class="num">{{ dec(row.loadKn, 2) }}</td>
             <td class="num">{{ fmt(row.loadKg, 2) }}</td>
             <td class="num">{{ fmt(row.strengthKg, 2) }}</td>
-            <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">{{ fmt(avgKg, 2) }}</td>
+            <td class="num avg" *ngIf="i === 0" rowspan="3">{{ fmt(avgKg1, 2) }}</td>
+            <td class="num avg" *ngIf="i === 3" rowspan="3">{{ fmt(avgKg2, 2) }}</td>
             <td class="num">{{ fmt(row.strengthMpa, 2) }}</td>
-            <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">{{ fmt(avgMpa, 2) }}</td>
-            <td class="num avg" *ngIf="i === 0" [attr.rowspan]="rows.length">± {{ entity.expAvg }}</td>
+            <td class="num avg" *ngIf="i === 0" rowspan="3">{{ fmt(avgMpa1, 2) }}</td>
+            <td class="num avg" *ngIf="i === 3" rowspan="3">{{ fmt(avgMpa2, 2) }}</td>
+            <td class="num avg" *ngIf="i === 0" rowspan="3">{{ expText(entity.expAvgA) }}</td>
+            <td class="num avg" *ngIf="i === 3" rowspan="3">{{ expText(entity.expAvgB) }}</td>
           </tr>
         </table>
       </td>

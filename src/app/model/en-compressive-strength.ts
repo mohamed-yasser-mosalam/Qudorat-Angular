@@ -55,7 +55,8 @@ export interface EnCompressiveStrength {
   testLoadknE: number;
   testLoadknF: number;
 
-  expAvg: string;
+  expAvgA: string;
+  expAvgB: string;
 
   testName: string;
   adopter: string;

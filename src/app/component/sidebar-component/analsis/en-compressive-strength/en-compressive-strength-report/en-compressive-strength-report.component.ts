@@ -36,8 +36,10 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
   id = 0;
   loaded = false;
   rows: CubeRow[] = [];
-  avgKg = 0;
-  avgMpa = 0;
+  avgKg1 = 0;
+  avgKg2 = 0;
+  avgMpa1 = 0;
+  avgMpa2 = 0;
   testDate = '';
 
   constructor(private authenticationService: AuthenticationService,
@@ -102,6 +104,14 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
     return Math.max(36, this.notesLineCount() * 18);
   }
 
+  expText(value: string | undefined | null): string {
+    return value ? `± ${value}` : '';
+  }
+
+  private mean(values: number[]): number {
+    return values.length ? values.reduce((s, n) => s + n, 0) / values.length : 0;
+  }
+
   private cube(sampleId: string, width: number, length: number, weight: number, loadKn: number): CubeRow {
     const area = Number(width) * Number(width);
     const loadKg = Number(loadKn) * 101.971;
@@ -130,9 +140,10 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
       this.cube(e.sampleIdE, e.widthE, e.lengthE, e.weightSampleE, e.testLoadknE),
       this.cube(e.sampleIdF, e.widthF, e.lengthF, e.weightSampleF, e.testLoadknF)
     ];
-    const n = this.rows.length;
-    this.avgKg = this.rows.reduce((s, r) => s + r.strengthKg, 0) / n;
-    this.avgMpa = this.rows.reduce((s, r) => s + r.strengthMpa, 0) / n;
+    this.avgKg1 = this.mean(this.rows.slice(0, 3).map(r => r.strengthKg));
+    this.avgKg2 = this.mean(this.rows.slice(3, 6).map(r => r.strengthKg));
+    this.avgMpa1 = this.mean(this.rows.slice(0, 3).map(r => r.strengthMpa));
+    this.avgMpa2 = this.mean(this.rows.slice(3, 6).map(r => r.strengthMpa));
     this.testDate = this.addDays(e.dataCasting, e.ageDays);
   }
 
@@ -244,12 +255,19 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
           num(this.fmt(row.strengthKg, 2))
         ];
         if (index === 0) {
-          cells.push({content: this.fmt(this.avgKg, 2), rowSpan: 6, styles: center});
+          cells.push({content: this.fmt(this.avgKg1, 2), rowSpan: 3, styles: center});
+        }
+        if (index === 3) {
+          cells.push({content: this.fmt(this.avgKg2, 2), rowSpan: 3, styles: center});
         }
         cells.push(num(this.fmt(row.strengthMpa, 2)));
         if (index === 0) {
-          cells.push({content: this.fmt(this.avgMpa, 2), rowSpan: 6, styles: center});
-          cells.push({content: e.expAvg ? `± ${e.expAvg}` : '', rowSpan: 6, styles: center});
+          cells.push({content: this.fmt(this.avgMpa1, 2), rowSpan: 3, styles: center});
+          cells.push({content: this.expText(e.expAvgA), rowSpan: 3, styles: center});
+        }
+        if (index === 3) {
+          cells.push({content: this.fmt(this.avgMpa2, 2), rowSpan: 3, styles: center});
+          cells.push({content: this.expText(e.expAvgB), rowSpan: 3, styles: center});
         }
         return cells;
       });
