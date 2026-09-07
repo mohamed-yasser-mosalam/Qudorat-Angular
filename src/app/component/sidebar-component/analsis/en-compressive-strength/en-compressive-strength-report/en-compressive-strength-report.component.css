@@ -80,7 +80,15 @@ td.avg {
 }
 
 .head-table .lbl {
-  width: 22%;
+  width: 20%;
+}
+
+.head-table td.astm {
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  width: 14%;
+  vertical-align: middle;
 }
 
 .remarks-table .remark-lbl {

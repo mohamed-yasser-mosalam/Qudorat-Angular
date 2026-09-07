@@ -40,12 +40,6 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
   avgMpa = 0;
   testDate = '';
 
-  readonly remarkLines = [
-    'The samples were tested in the presence of the Consultant’s Representative and the Contractor’s Representative.',
-    'This report represents the laboratory-tested samples only.',
-    'The concrete was cast by the client.'
-  ];
-
   constructor(private authenticationService: AuthenticationService,
               private service: EnCompressiveStrengthService,
               private activatedRoute: ActivatedRoute) {
@@ -216,11 +210,11 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
       autoTable(doc, {
         startY: 40.5,
         body: [
-          ['Project :', e.projectName || '', 'Structure :', e.structure || ''],
+          ['Project :', e.projectName || '', 'Structure :', e.structure || '', {content: '', rowSpan: 2}],
           ['Company :', e.company || '', 'Sample by :', e.sampleBy || ''],
-          ['Location :', e.location || '', 'Slump (mm)', e.slump != null ? String(e.slump) : ''],
-          ['Date Casting :', this.formatDate(e.dataCasting), 'Temperature (°C)', this.fmt(e.temperature, 1)],
-          ['Date Received :', this.formatDate(e.dataReceived), 'Req. Strength for 28 Days (kg/cm²)', e.reqstrengthKg ? String(e.reqstrengthKg) : ''],
+          ['Location :', e.location || '', 'Slump (mm)', e.slump != null ? String(e.slump) : '', 'ASTM C143/C143M'],
+          ['Date Casting :', this.formatDate(e.dataCasting), 'Temperature (°C)', this.fmt(e.temperature, 1), 'ASTM C1064/C1064M'],
+          ['Date Received :', this.formatDate(e.dataReceived), 'Req. Strength for 28 Days (kg/cm²)', e.reqstrengthKg ? String(e.reqstrengthKg) : '', {content: '', rowSpan: 4}],
           ['Testing @', e.ageDays != null ? String(e.ageDays) : '', 'Req. Strength for 28 Days (Mpa)', this.reqMpa()],
           ['Days Date', this.testDate, 'Sample No .', e.sampleNo || ''],
           ['Lab. Report No. #', e.labreportNo || '', 'Type of Sample :', e.sampleType || '']
@@ -228,10 +222,11 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
         ...grid,
         styles: {...grid.styles, fontSize: 8},
         columnStyles: {
-          0: {cellWidth: 38, fontStyle: 'bold'},
-          1: {...center, cellWidth: 57},
-          2: {cellWidth: 48, fontStyle: 'bold'},
-          3: {...center, cellWidth: 47}
+          0: {cellWidth: 32, fontStyle: 'bold'},
+          1: {...center, cellWidth: 48},
+          2: {cellWidth: 42, fontStyle: 'bold'},
+          3: {...center, cellWidth: 42},
+          4: {...center, cellWidth: 26, fontStyle: 'bold', fontSize: 7}
         }
       });
 
@@ -297,18 +292,6 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
           [
             {content: 'Remarks :', styles: {fontStyle: 'bold', halign: 'left', valign: 'top', minCellHeight: remarksH}},
             {content: noteText, styles: {halign: 'left', valign: 'top', minCellHeight: remarksH}}
-          ],
-          [
-            {content: '1-', styles: {fontStyle: 'bold', halign: 'left', valign: 'top'}},
-            {content: this.remarkLines[0], styles: {halign: 'left', valign: 'top'}}
-          ],
-          [
-            {content: '2-', styles: {fontStyle: 'bold', halign: 'left', valign: 'top'}},
-            {content: this.remarkLines[1], styles: {halign: 'left', valign: 'top'}}
-          ],
-          [
-            {content: '3-', styles: {fontStyle: 'bold', halign: 'left', valign: 'top'}},
-            {content: this.remarkLines[2], styles: {halign: 'left', valign: 'top'}}
           ]
         ],
         ...grid,

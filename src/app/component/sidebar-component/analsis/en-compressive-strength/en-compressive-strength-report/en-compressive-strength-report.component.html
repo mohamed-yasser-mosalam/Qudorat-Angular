@@ -12,6 +12,7 @@
             <td>{{ entity.projectName }}</td>
             <td class="lbl">Structure :</td>
             <td>{{ entity.structure }}</td>
+            <td class="astm" rowspan="2"></td>
           </tr>
           <tr>
             <td class="lbl">Company :</td>
@@ -24,18 +25,21 @@
             <td>{{ entity.location }}</td>
             <td class="lbl">Slump (mm)</td>
             <td>{{ entity.slump }}</td>
+            <td class="astm">ASTM C143/C143M</td>
           </tr>
           <tr>
             <td class="lbl">Date Casting :</td>
             <td>{{ formatDate(entity.dataCasting) }}</td>
             <td class="lbl">Temperature (°C)</td>
             <td>{{ fmt(entity.temperature, 1) }}</td>
+            <td class="astm">ASTM C1064/C1064M</td>
           </tr>
           <tr>
             <td class="lbl">Date Received :</td>
             <td>{{ formatDate(entity.dataReceived) }}</td>
             <td class="lbl">Req. Strength for 28 Days (kg/cm²)</td>
             <td>{{ entity.reqstrengthKg || '' }}</td>
+            <td class="astm" rowspan="4"></td>
           </tr>
           <tr>
             <td class="lbl">Testing &#64;</td>
@@ -104,18 +108,6 @@
           <tr>
             <td class="remark-lbl">Remarks :</td>
             <td class="remark-val" [style.min-height.px]="remarksMinHeight()">{{ entity.notes }}</td>
-          </tr>
-          <tr>
-            <td class="remark-lbl">1-</td>
-            <td class="remark-val">{{ remarkLines[0] }}</td>
-          </tr>
-          <tr>
-            <td class="remark-lbl">2-</td>
-            <td class="remark-val">{{ remarkLines[1] }}</td>
-          </tr>
-          <tr>
-            <td class="remark-lbl">3-</td>
-            <td class="remark-val">{{ remarkLines[2] }}</td>
           </tr>
         </table>
       </td>
