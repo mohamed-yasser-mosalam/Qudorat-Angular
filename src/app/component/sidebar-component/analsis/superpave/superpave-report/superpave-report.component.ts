@@ -70,6 +70,9 @@ export class SuperpaveReportComponent implements OnInit {
   pctGmmNmaxA = 0;
   pctGmmNmaxB = 0;
   pctGmmNmaxAvg = 0;
+  pctGmmNdesNmaxA = 0;
+  pctGmmNdesNmaxB = 0;
+  pctGmmNdesNmaxAvg = 0;
   pctGmmNiniNmaxA = 0;
   pctGmmNiniNmaxB = 0;
   pctGmmNiniNmaxAvg = 0;
@@ -217,8 +220,11 @@ export class SuperpaveReportComponent implements OnInit {
     this.pctGmmNmaxA = this.safeDiv(this.gmbNmaxA, this.gmmAvg) * 100;
     this.pctGmmNmaxB = this.safeDiv(this.gmbNmaxB, this.gmmAvg) * 100;
     this.pctGmmNmaxAvg = (this.pctGmmNmaxA + this.pctGmmNmaxB) / 2;
-    this.pctGmmNiniNmaxA = this.pctGmmNmaxA * this.safeDiv(this.superpave.heightNdesC, this.superpave.heightNiniC);
-    this.pctGmmNiniNmaxB = this.pctGmmNmaxB * this.safeDiv(this.superpave.heightNdesD, this.superpave.heightNiniD);
+    this.pctGmmNdesNmaxA = this.pctGmmNmaxA * this.safeDiv(this.superpave.heightNmaxC, this.superpave.heightNdesC);
+    this.pctGmmNdesNmaxB = this.pctGmmNmaxB * this.safeDiv(this.superpave.heightNmaxD, this.superpave.heightNdesD);
+    this.pctGmmNdesNmaxAvg = (this.pctGmmNdesNmaxA + this.pctGmmNdesNmaxB) / 2;
+    this.pctGmmNiniNmaxA = this.pctGmmNdesNmaxA * this.safeDiv(this.superpave.heightNdesC, this.superpave.heightNiniC);
+    this.pctGmmNiniNmaxB = this.pctGmmNdesNmaxB * this.safeDiv(this.superpave.heightNdesD, this.superpave.heightNiniD);
     this.pctGmmNiniNmaxAvg = (this.pctGmmNiniNmaxA + this.pctGmmNiniNmaxB) / 2;
 
     this.vaNdesA = this.safeDiv(this.gmmAvg - this.gmbNdesA, this.gmmAvg) * 100;
@@ -353,7 +359,7 @@ export class SuperpaveReportComponent implements OnInit {
           ['Height @ Ndes', num(this.fmt(s.heightNdesA, 1)), num(this.fmt(s.heightNdesB, 1)), num(this.fmt((s.heightNdesA + s.heightNdesB) / 2, 1)), '', num(this.fmt(s.heightNdesC, 1)), num(this.fmt(s.heightNdesD, 1)), num(this.fmt((s.heightNdesC + s.heightNdesD) / 2, 1)), ''],
           ['Height @ Nmax', num(this.zeroBlank(s.heightNmaxA, 1)), num(this.zeroBlank(s.heightNmaxB, 1)), num(this.zeroBlank((s.heightNmaxA + s.heightNmaxB) / 2, 1)), '', num(this.fmt(s.heightNmaxC, 1)), num(this.fmt(s.heightNmaxD, 1)), num(this.fmt((s.heightNmaxC + s.heightNmaxD) / 2, 1)), ''],
           ['% Gmm @ Nini', num(this.fmt(this.pctGmmNiniA, 1)), num(this.fmt(this.pctGmmNiniB, 1)), num(this.fmt(this.pctGmmNiniAvg, 1)), num(s.gmmNiniLimits || ''), num(this.fmt(this.pctGmmNiniNmaxA, 1)), num(this.fmt(this.pctGmmNiniNmaxB, 1)), num(this.fmt(this.pctGmmNiniNmaxAvg, 1)), ''],
-          ['% Gmm @ Ndes', num(this.fmt(this.pctGmmNdesA, 1)), num(this.fmt(this.pctGmmNdesB, 1)), num(this.fmt(this.pctGmmNdesAvg, 1)), num(s.gmmNdesLimits || ''), num(this.fmt(this.pctGmmNmaxA, 1)), num(this.fmt(this.pctGmmNmaxB, 1)), num(this.fmt(this.pctGmmNmaxAvg, 1)), ''],
+          ['% Gmm @ Ndes', num(this.fmt(this.pctGmmNdesA, 1)), num(this.fmt(this.pctGmmNdesB, 1)), num(this.fmt(this.pctGmmNdesAvg, 1)), num(s.gmmNdesLimits || ''), num(this.fmt(this.pctGmmNdesNmaxA, 1)), num(this.fmt(this.pctGmmNdesNmaxB, 1)), num(this.fmt(this.pctGmmNdesNmaxAvg, 1)), ''],
           ['% Gmm @ Nmax', '', '', '', '', num(this.fmt(this.pctGmmNmaxA, 1)), num(this.fmt(this.pctGmmNmaxB, 1)), num(this.fmt(this.pctGmmNmaxAvg, 1)), num(s.gmmNmaxLimits || '')],
           ['Air Voids %', num(this.fmt(this.vaNdesA, 1)), num(this.fmt(this.vaNdesB, 1)), num(this.fmt(this.vaNdesAvg, 1)), num(s.airvoidsLimits || ''), num(this.fmt(this.vaNmaxA, 1)), num(this.fmt(this.vaNmaxB, 1)), num(this.fmt(this.vaNmaxAvg, 1)), ''],
           ['Voids in Mineral Aggregate (VMA) %', num(this.fmt(this.vmaNdesA, 1)), num(this.fmt(this.vmaNdesB, 1)), num(this.fmt(this.vmaNdesAvg, 1)), num(s.vmaLimits || ''), num(this.fmt(this.vmaNmaxA, 1)), num(this.fmt(this.vmaNmaxB, 1)), num(this.fmt(this.vmaNmaxAvg, 1)), ''],
