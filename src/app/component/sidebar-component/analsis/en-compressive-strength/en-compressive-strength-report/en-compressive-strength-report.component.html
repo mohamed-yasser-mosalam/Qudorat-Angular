@@ -80,7 +80,6 @@
             <th>Avg. Comp. Strength (kg/cm²)</th>
             <th>Compressive Strength (Mpa)</th>
             <th>Avg. Comp. Strength (Mpa)</th>
-            <th>Avg. Comp. Strength (Mpa) with exp u k=2</th>
           </tr>
           <tr *ngFor="let row of rows; let i = index">
             <td class="num">{{ row.sampleId }}</td>
@@ -96,10 +95,8 @@
             <td class="num avg" *ngIf="i === 0" rowspan="3">{{ fmt(avgKg1, 2) }}</td>
             <td class="num avg" *ngIf="i === 3" rowspan="3">{{ fmt(avgKg2, 2) }}</td>
             <td class="num">{{ fmt(row.strengthMpa, 2) }}</td>
-            <td class="num avg" *ngIf="i === 0" rowspan="3">{{ fmt(avgMpa1, 2) }}</td>
-            <td class="num avg" *ngIf="i === 3" rowspan="3">{{ fmt(avgMpa2, 2) }}</td>
-            <td class="num avg" *ngIf="i === 0" rowspan="3">{{ expText(entity.expAvgA) }}</td>
-            <td class="num avg" *ngIf="i === 3" rowspan="3">{{ expText(entity.expAvgB) }}</td>
+            <td class="num avg" *ngIf="i === 0" rowspan="3">{{ avgWithExp(avgMpa1, entity.expAvgA) }}</td>
+            <td class="num avg" *ngIf="i === 3" rowspan="3">{{ avgWithExp(avgMpa2, entity.expAvgB) }}</td>
           </tr>
         </table>
       </td>

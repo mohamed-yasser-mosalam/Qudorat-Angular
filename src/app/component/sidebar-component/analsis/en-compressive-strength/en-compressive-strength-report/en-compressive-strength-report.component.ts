@@ -104,8 +104,9 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
     return Math.max(36, this.notesLineCount() * 18);
   }
 
-  expText(value: string | undefined | null): string {
-    return value ? `± ${value}` : '';
+  avgWithExp(avg: number, exp: string | undefined | null): string {
+    const value = this.fmt(avg, 2);
+    return exp ? `${value} ± ${exp}` : value;
   }
 
   private mean(values: number[]): number {
@@ -262,12 +263,10 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
         }
         cells.push(num(this.fmt(row.strengthMpa, 2)));
         if (index === 0) {
-          cells.push({content: this.fmt(this.avgMpa1, 2), rowSpan: 3, styles: center});
-          cells.push({content: this.expText(e.expAvgA), rowSpan: 3, styles: center});
+          cells.push({content: this.avgWithExp(this.avgMpa1, e.expAvgA), rowSpan: 3, styles: center});
         }
         if (index === 3) {
-          cells.push({content: this.fmt(this.avgMpa2, 2), rowSpan: 3, styles: center});
-          cells.push({content: this.expText(e.expAvgB), rowSpan: 3, styles: center});
+          cells.push({content: this.avgWithExp(this.avgMpa2, e.expAvgB), rowSpan: 3, styles: center});
         }
         return cells;
       });
@@ -287,8 +286,7 @@ export class EnCompressiveStrengthReportComponent implements OnInit {
           {content: 'Compressive Strength (kg/cm²)', styles: center},
           {content: 'Avg. Comp. Strength (kg/cm²)', styles: center},
           {content: 'Compressive Strength (Mpa)', styles: center},
-          {content: 'Avg. Comp. Strength (Mpa)', styles: center},
-          {content: 'Avg. Comp. Strength (Mpa) with exp u k=2', styles: center}
+          {content: 'Avg. Comp. Strength (Mpa)', styles: center}
         ]],
         body,
         ...grid,
